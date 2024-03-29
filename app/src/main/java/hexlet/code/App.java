@@ -19,13 +19,11 @@ public class App {
             config.bundledPlugins.enableDevLogging();
         });
         // Описываем, что загрузится по адресу /
-        app.get("/welcome", ctx -> ctx.result("Welcome to Hexlet!"));
         app.get("/", ctx -> ctx.result("Hello World"));
         return app;
     }
     public static void main(String[] args) throws IOException, SQLException {
         var app = getApp();
-
         app.start(7070);
     }
 }
