@@ -14,7 +14,7 @@ public final class AppTest {
     private static String website;
     private static String name;
 
-   @BeforeEach
+    @BeforeEach
     public void setUp() throws Exception {
         app = App.getApp();
     }
