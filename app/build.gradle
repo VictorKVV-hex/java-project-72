@@ -36,7 +36,6 @@ dependencies {
     implementation ("org.postgresql:postgresql:42.7.1")
     implementation ("com.zaxxer:HikariCP:5.0.1")
     implementation ("com.h2database:h2:2.2.224")
-    implementation ("com.zaxxer:HikariCP:5.1.0")
     implementation ("org.apache.commons:commons-text:1.11.0")
     implementation ("gg.jte:jte:3.1.9")
     implementation ("com.konghq:unirest-java:4.0.0-RC2")
