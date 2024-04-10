@@ -5,6 +5,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import gg.jte.ContentType;
 import gg.jte.TemplateEngine;
 import gg.jte.resolve.ResourceCodeResolver;
+import hexlet.code.controller.CheckController;
 import hexlet.code.controller.RootController;
 import hexlet.code.controller.UrlController;
 import hexlet.code.util.NamedRoutes;
@@ -45,17 +46,18 @@ public class App {
             statement.execute(sql);
         }
         BaseRepository.dataSource = dataSource;
-        // Создаем приложение
+
         var app = Javalin.create(config -> {
             config.bundledPlugins.enableDevLogging();
             config.fileRenderer(new JavalinJte(createTemplateEngine()));
         });
-        // Описываем, что загрузится по адресу /
+        // Что загрузится по адресу /
 //        app.get("/", ctx -> ctx.result("Hello World"));
         app.get("/", RootController::index);
         app.get("/urls", UrlController::index);
         app.get(NamedRoutes.urlPath("{id}"), UrlController::show);
         app.post("/urls", UrlController::create);
+        app.post(NamedRoutes.urlChecksPath("{id}"), CheckController::create);
 
         return app;
     }
