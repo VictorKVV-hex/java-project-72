@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 import hexlet.code.util.NamedRoutes;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import java.util.Optional;
+//import java.util.Optional;
 
 public class CheckController {
     public static void create(Context ctx) throws SQLException {
@@ -26,17 +26,15 @@ public class CheckController {
 
             var statusCode = response.getStatus();
             var title = doc.title();
-/*            var h1Doc = doc.selectFirst("h1");
-            var h1 = h1Doc == null ? "" : h1Doc.text();*/
             var h1Doc = doc.select("h1").first();
+/*            var h1Doc = doc.select("h1").first();
             Optional<String> h1Opt = Optional.of(h1Doc.text());
-            var h1 = h1Opt.get();
-
-            var descriptionDoc = doc.selectFirst("[name=description]");
-            var description = descriptionDoc == null ? "" : descriptionDoc.attr("content");
-
+            var h1 = h1Opt.get();*/
+            var h1 = h1Doc == null ? "" : h1Doc.text();
+            var descriptionDoc = doc.select("meta[name=description]").first();
+            var content = descriptionDoc == null ? "" : descriptionDoc.attr("content");
             var createdAt = new Timestamp(System.currentTimeMillis());
-            var urlCheck = new UrlCheck(statusCode, title, h1, description, urlId, createdAt);
+            var urlCheck = new UrlCheck(statusCode, title, h1, content, urlId, createdAt);
             CheckRepository.save(urlCheck);
 
             ctx.sessionAttribute("flash", "Страница успешно проверена");
@@ -45,7 +43,6 @@ public class CheckController {
             ctx.sessionAttribute("flash", "Некорректный URL");
             ctx.sessionAttribute("flash-type", "danger");
         }
-
         ctx.redirect(NamedRoutes.urlPath(urlId));
     }
 }
