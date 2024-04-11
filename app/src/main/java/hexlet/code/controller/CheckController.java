@@ -12,8 +12,6 @@ import java.sql.Timestamp;
 import hexlet.code.util.NamedRoutes;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-
 import java.util.Optional;
 
 public class CheckController {

@@ -10,11 +10,10 @@ import java.net.URI;
 //import java.net.URL;
 import hexlet.code.model.Url;
 import io.javalin.http.NotFoundResponse;
-
 import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.Collections;
+
 
 public class UrlController {
     public static void create(Context ctx) throws SQLException {
