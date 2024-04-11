@@ -26,12 +26,12 @@ public class CheckController {
 
             var statusCode = response.getStatus();
             var title = doc.title();
-            var h1Doc = doc.select("h1").first();
+            var h1Doc = doc.selectFirst("h1");
 /*            var h1Doc = doc.select("h1").first();
             Optional<String> h1Opt = Optional.of(h1Doc.text());
             var h1 = h1Opt.get();*/
             var h1 = h1Doc == null ? "" : h1Doc.text();
-            var descriptionDoc = doc.select("meta[name=description]").first();
+            var descriptionDoc = doc.selectFirst("meta[name=description]");
             var content = descriptionDoc == null ? "" : descriptionDoc.attr("content");
             var createdAt = new Timestamp(System.currentTimeMillis());
             var urlCheck = new UrlCheck(statusCode, title, h1, content, urlId, createdAt);
