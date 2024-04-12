@@ -28,11 +28,9 @@ public class App {
     }
     public static Javalin getApp() throws SQLException {
         var hikariConfig = new HikariConfig();
-//        hikariConfig.setJdbcUrl("jdbc:h2:mem:project;DB_CLOSE_DELAY=-1;");
         String databaseUrl = System.getenv()
                 .getOrDefault("JDBC_DATABASE_URL", "jdbc:h2:mem:project;DB_CLOSE_DELAY=-1;");
         if (databaseUrl.contains("postgresql")) {
-//            hikariConfig.setDriverClassName(org.postgresql.Driver.class.getName());
             hikariConfig.setDriverClassName("org.postgresql.Driver");
         }
         hikariConfig.setJdbcUrl(databaseUrl);
@@ -51,8 +49,6 @@ public class App {
             config.bundledPlugins.enableDevLogging();
             config.fileRenderer(new JavalinJte(createTemplateEngine()));
         });
-        // Что загрузится по адресу /
-//        app.get("/", ctx -> ctx.result("Hello World"));
         app.get("/", RootController::index);
         app.get("/urls", UrlController::index);
         app.get(NamedRoutes.urlPath("{id}"), UrlController::show);

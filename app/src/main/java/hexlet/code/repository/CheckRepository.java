@@ -58,7 +58,6 @@ public final class CheckRepository extends BaseRepository {
              var stmt = conn.prepareStatement(sql);
              var resultSet = stmt.executeQuery()) {
             Map<Long, UrlCheck> result = new HashMap<>();
-
             while (resultSet.next()) {
                 var id = resultSet.getLong("id");
                 var statusCode = resultSet.getInt("status_code");
@@ -71,7 +70,6 @@ public final class CheckRepository extends BaseRepository {
                 urlCheck.setId(id);
                 result.put(urlCheck.getUrlId(), urlCheck);
             }
-
             return result;
         }
     }

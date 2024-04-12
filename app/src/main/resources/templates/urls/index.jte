@@ -15,7 +15,7 @@ content = @`
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Наименовние</th>
-            <th scope="col">Дата/время последней проверки</th>
+            <th scope="col">Последняя проверка</th>
             <th scope="col">Код ответа</th>
         </tr>
         </thead>
@@ -26,7 +26,7 @@ content = @`
                 <td>
                     <a href="${NamedRoutes.urlPath(url.getId())}">${url.getName()}</a>
                 </td>
-                <td>${page.getChecks().isEmpty() || page.getChecks().get(url.getId()) == null ? "" : page.getChecks().get(url.getId()).getCreatedAt().toString()}</td>
+                <td>${page.getChecks().isEmpty() ? "" : page.getChecks().get(url.getId()).getCreatedAt().toString()}</td>
                 <td>${page.getChecks().isEmpty() || page.getChecks().get(url.getId()) == null ? "" : page.getChecks().get(url.getId()).getStatusCode().toString()}</td>
             </tr>
         @endfor
