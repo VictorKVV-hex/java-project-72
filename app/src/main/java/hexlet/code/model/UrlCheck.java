@@ -23,6 +23,5 @@ public class UrlCheck {
         this.h1 = h1;
         this.description = description;
         this.urlId = urlId;
-//        this.createdAt = createdAt;
     }
 }

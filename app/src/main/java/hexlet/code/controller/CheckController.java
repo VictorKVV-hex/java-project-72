@@ -29,7 +29,6 @@ public class CheckController {
             var descriptionDoc = doc.selectFirst("meta[name=description]");
             var content = descriptionDoc == null ? "" : descriptionDoc.attr("content");
             var createdAt = new Timestamp(System.currentTimeMillis());
-//            var urlCheck = new UrlCheck(statusCode, title, h1, content, urlId, createdAt);
             var urlCheck = new UrlCheck(statusCode, title, h1, content, urlId);
             CheckRepository.save(urlCheck);
 

@@ -21,7 +21,6 @@ public final class CheckRepository extends BaseRepository {
             stmt.setString(3, urlCheck.getH1());
             stmt.setString(4, urlCheck.getTitle());
             stmt.setString(5, urlCheck.getDescription());
-//            stmt.setTimestamp(6, urlCheck.getCreatedAt());
             stmt.setTimestamp(6, time);
             stmt.executeUpdate();
 
@@ -49,7 +48,6 @@ public final class CheckRepository extends BaseRepository {
                 var h1 = resultSet.getString("h1");
                 var description = resultSet.getString("description");
                 var createdAt = resultSet.getTimestamp("created_at");
-//                var urlCheck = new UrlCheck(statusCode, title, h1, description, urlId, createdAt);
                 var urlCheck = new UrlCheck(statusCode, title, h1, description, urlId);
                 urlCheck.setId(id);
                 urlCheck.setCreatedAt(createdAt);
@@ -72,7 +70,6 @@ public final class CheckRepository extends BaseRepository {
                 var description = resultSet.getString("description");
                 var urlId = resultSet.getLong("url_id");
                 var createdAt = resultSet.getTimestamp("created_at");
-//                var urlCheck = new UrlCheck(statusCode, title, h1, description, urlId, createdAt);
                 var urlCheck = new UrlCheck(statusCode, title, h1, description, urlId);
                 urlCheck.setId(id);
                 urlCheck.setCreatedAt(createdAt);

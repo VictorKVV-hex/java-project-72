@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-//import java.sql.Timestamp;
 import java.util.Date;
 
 import okhttp3.mockwebserver.MockResponse;
@@ -105,9 +104,6 @@ public final class AppTest {
     @Test
     public void testCheck() {
         JavalinTest.test(app, (server, client) -> {
-/*            client.post("/urls", "url=" + site);
-            var urlId = UrlRepository.findByName(adres).getId();   */ // --> Или добавить сайт post'ом
-//            var url = new Url(site, new Timestamp(System.currentTimeMillis()));
             var url = new Url(site);
             UrlRepository.save(url);
             var urlId = UrlRepository.findByName(site).getId();
