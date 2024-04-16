@@ -107,7 +107,8 @@ public final class AppTest {
         JavalinTest.test(app, (server, client) -> {
 /*            client.post("/urls", "url=" + site);
             var urlId = UrlRepository.findByName(adres).getId();   */ // --> Или добавить сайт post'ом
-            var url = new Url(site, new Timestamp(System.currentTimeMillis()));
+//            var url = new Url(site, new Timestamp(System.currentTimeMillis()));
+            var url = new Url(site);
             UrlRepository.save(url);
             var urlId = UrlRepository.findByName(site).getId();
             client.post(String.format("/urls/%s/checks", urlId));

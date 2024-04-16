@@ -13,8 +13,8 @@ public class Url {
     private String name;
     private Timestamp createdAt;
 
-    public Url(String name, Timestamp createdAt) {
+    public Url(String name) {
         this.name = name;
-        this.createdAt = createdAt;
+//        this.createdAt = createdAt;
     }
 }

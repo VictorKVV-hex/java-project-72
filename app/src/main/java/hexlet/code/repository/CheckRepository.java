@@ -3,6 +3,7 @@ package hexlet.code.repository;
 import hexlet.code.model.UrlCheck;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public final class CheckRepository extends BaseRepository {
     public static void save(UrlCheck urlCheck) throws SQLException {
         String sql = "INSERT INTO url_checks (url_id, status_code, h1, title, description, created_at)"
                 + " VALUES (?, ?, ?, ?, ?, ?)";
+        var time = new Timestamp(System.currentTimeMillis());
         try (var conn = dataSource.getConnection();
              var stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setLong(1, urlCheck.getUrlId());
@@ -19,12 +21,14 @@ public final class CheckRepository extends BaseRepository {
             stmt.setString(3, urlCheck.getH1());
             stmt.setString(4, urlCheck.getTitle());
             stmt.setString(5, urlCheck.getDescription());
-            stmt.setTimestamp(6, urlCheck.getCreatedAt());
+//            stmt.setTimestamp(6, urlCheck.getCreatedAt());
+            stmt.setTimestamp(6, time);
             stmt.executeUpdate();
 
             var generatedKeys = stmt.getGeneratedKeys();
             if (generatedKeys.next()) {
                 urlCheck.setId(generatedKeys.getLong(1));
+                urlCheck.setCreatedAt(time);
             } else {
                 throw new SQLException("DB have not returned an id after saving an entity");
             }
@@ -45,8 +49,10 @@ public final class CheckRepository extends BaseRepository {
                 var h1 = resultSet.getString("h1");
                 var description = resultSet.getString("description");
                 var createdAt = resultSet.getTimestamp("created_at");
-                var urlCheck = new UrlCheck(statusCode, title, h1, description, urlId, createdAt);
+//                var urlCheck = new UrlCheck(statusCode, title, h1, description, urlId, createdAt);
+                var urlCheck = new UrlCheck(statusCode, title, h1, description, urlId);
                 urlCheck.setId(id);
+                urlCheck.setCreatedAt(createdAt);
                 result.add(urlCheck);
             }
             return result;
@@ -66,8 +72,10 @@ public final class CheckRepository extends BaseRepository {
                 var description = resultSet.getString("description");
                 var urlId = resultSet.getLong("url_id");
                 var createdAt = resultSet.getTimestamp("created_at");
-                var urlCheck = new UrlCheck(statusCode, title, h1, description, urlId, createdAt);
+//                var urlCheck = new UrlCheck(statusCode, title, h1, description, urlId, createdAt);
+                var urlCheck = new UrlCheck(statusCode, title, h1, description, urlId);
                 urlCheck.setId(id);
+                urlCheck.setCreatedAt(createdAt);
                 result.put(urlCheck.getUrlId(), urlCheck);
             }
             return result;

@@ -11,7 +11,7 @@ import hexlet.code.model.Url;
 import io.javalin.http.NotFoundResponse;
 import java.net.URL;
 import java.sql.SQLException;
-import java.sql.Timestamp;
+//import java.sql.Timestamp;
 
 
 public class UrlController {
@@ -38,7 +38,8 @@ public class UrlController {
             ctx.sessionAttribute("flash-type", "info");
             ctx.redirect("/urls");
         } else {
-            var url = new Url(obrezokURL, new Timestamp(System.currentTimeMillis()));
+//            var url = new Url(obrezokURL, new Timestamp(System.currentTimeMillis()));
+            var url = new Url(obrezokURL);
             UrlRepository.save(url);
             ctx.sessionAttribute("flash", "Страница успешно добавлена");
             ctx.sessionAttribute("flash-type", "success");
