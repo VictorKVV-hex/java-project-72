@@ -41,7 +41,6 @@ public final class AppTest {
         testServer.enqueue(new MockResponse().setBody(content));
         testServer.start();
 
-//        site = testServer.url("/").toString();
         site = testServer.url("").toString();
         adres = String.format("http://localhost:%s", testServer.getPort());
     }

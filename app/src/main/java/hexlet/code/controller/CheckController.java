@@ -12,7 +12,6 @@ import java.sql.Timestamp;
 import hexlet.code.util.NamedRoutes;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-//import java.util.Optional;
 
 public class CheckController {
     public static void create(Context ctx) throws SQLException {
@@ -23,13 +22,9 @@ public class CheckController {
         try {
             HttpResponse<String> response = Unirest.get(url.getName()).asString();
             Document doc = Jsoup.parse(response.getBody());
-
             var statusCode = response.getStatus();
             var title = doc.title();
             var h1Doc = doc.selectFirst("h1");
-/*            var h1Doc = doc.select("h1").first();
-            Optional<String> h1Opt = Optional.of(h1Doc.text());
-            var h1 = h1Opt.get();*/
             var h1 = h1Doc == null ? "" : h1Doc.text();
             var descriptionDoc = doc.selectFirst("meta[name=description]");
             var content = descriptionDoc == null ? "" : descriptionDoc.attr("content");

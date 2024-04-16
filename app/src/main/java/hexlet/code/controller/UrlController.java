@@ -7,7 +7,6 @@ import hexlet.code.repository.CheckRepository;
 import io.javalin.http.Context;
 import hexlet.code.repository.UrlRepository;
 import java.net.URI;
-//import java.net.URL;
 import hexlet.code.model.Url;
 import io.javalin.http.NotFoundResponse;
 import java.net.URL;
@@ -25,9 +24,7 @@ public class UrlController {
         String obrezokURL;
 
         try {
-//            normalizedURL = String.valueOf(new URI(input).toURL());
             URL url = new URI(input).toURL();
-//            obrezokURL = getObrezokURL(url);
             obrezokURL = String.format("%s://%s", url.getProtocol(), url.getAuthority());
         } catch (Exception e) {
             ctx.sessionAttribute("flash", "Incorrect URL");
@@ -53,7 +50,6 @@ public class UrlController {
         var urls = UrlRepository.getEntities();
         var checks = CheckRepository.getAllLastChecks();
         var page = new UrlsPage(urls, checks);
-//        var page = new UrlsPage(urls);
         page.setFlash(ctx.consumeSessionAttribute("flash"));
         page.setFlashType(ctx.consumeSessionAttribute("flash-type"));
         ctx.render("urls/index.jte", model("page", page));
